@@ -24,12 +24,18 @@ const getAllVehicles = async (req, res) => {
                 vehicleTypeReq = result.Response.Results.VehicleTypesForMakeIds;
             });
 
-            allVehicles.push({
+            let vehicleMake = {
                 makeId: makeId,
                 makeName: make.Make_Name,
                 vehicleTypes: vehicleTypeReq
-            });
-            // console.log(allVehicles, 'ALL VEHIULES')
+            }
+            allVehicles.push(vehicleMake)
+            // allVehicles.push({
+            //     makeId: makeId,
+            //     makeName: make.Make_Name,
+            //     vehicleTypes: vehicleTypeReq
+            // });
+            console.log(allVehicles, 'ALL VEHIULES')
         }
         console.log(allVehicles, 'all vehs')
         return res.status(200).json(allVehicles);

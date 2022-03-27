@@ -8,7 +8,7 @@ const getMakes = async () => {
 };
 
 const getVehicleTypesForMake = async (makeId) => {
-    return await axios(`https://vpic.nhtsa.dot.gov/api/vehicles/GetVehicleTypesForMakeId/${444}?format=xml`)
+    return await axios(`https://vpic.nhtsa.dot.gov/api/vehicles/GetVehicleTypesForMakeId/${makeId}?format=xml`)
         .then(response => { return response.data })
         .catch(e => console.log(e));
 };

@@ -9,9 +9,8 @@ const { MONGO_URI } = process.env;
 const options = { useNewUrlParser: true, useUnifiedTopology: true }
 
 const dbName = require('./constants.js')
-const parsingXML = require('./parsingXML')
+const getAllVehicles = require('./api/automobilesController.js')
 const connect = require('./connection/dbConnection.js')
-const test = require('./testDb.js')
 
 const PORT = 4000;
 
@@ -32,8 +31,7 @@ const app = express()
     .use(express.static("./server/assets"))
     .use(bodyParser.json())
 
-    .get("/", parsingXML)
-    .post("/test", test)
+    .get("/", getAllVehicles)
 
 async function setup() {
     try {

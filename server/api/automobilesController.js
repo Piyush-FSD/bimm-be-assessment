@@ -1,28 +1,26 @@
 const xml2js = require('xml2js');
 const parseDataService = require("./automobilesService.js");
 const getConnection = require('../connection/dbConnection.js')
-const dbName = require('../constants.js')
 
 const getAllVehicles = async (req, res) => {
     try {
         const client = await getConnection();
-        const db = client.db(dbName);
+        const db = client.db("BIMM");
 
         let allVehicles = [];
+        let allMakesData;
+
         const xmlParser = new xml2js.Parser({
             explicitArray: false
         });
 
         let vehicleMakes = await parseDataService.getMakes();
-        let allMakesData;
-
         xmlParser.parseString(vehicleMakes, function (err, result) {
             if (err) throw err
             allMakesData = result.Response.Results.AllVehicleMakes;
         });
 
         const firstTenMakes = allMakesData.slice(0, 10)
-
         for (const make of firstTenMakes) {
             const makeId = make.Make_ID;
             const vehicleType = await parseDataService.getVehicleTypesForMake(makeId);
@@ -32,7 +30,6 @@ const getAllVehicles = async (req, res) => {
                 if (err) throw err
                 vehicleTypeReq = result.Response.Results.VehicleTypesForMakeIds;
             });
-            // console.log(vehicleTypeReq)
 
             let vehicleMake = {
                 makeId: makeId,
@@ -40,8 +37,10 @@ const getAllVehicles = async (req, res) => {
                 vehicleTypes: vehicleTypeReq
             }
 
-            console.log(vehicleMake.vehicleTypes)
-            allVehicles.push(vehicleMake)
+            if (vehicleMake) {
+                allVehicles.push(vehicleMake)
+            }
+
         };
         const insertData = await db.collection("vehicles").insertMany(allVehicles);
 

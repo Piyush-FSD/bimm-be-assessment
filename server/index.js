@@ -8,7 +8,6 @@ require('dotenv').config()
 const { MONGO_URI } = process.env;
 const options = { useNewUrlParser: true, useUnifiedTopology: true }
 
-const dbName = require('./constants.js')
 const getAllVehicles = require('./api/automobilesController.js')
 const connect = require('./connection/dbConnection.js')
 
@@ -47,4 +46,4 @@ async function setup() {
 setup();
 const client = new MongoClient(MONGO_URI, options);
 client.connect();
-app.locals.db = client.db(dbName);
+app.locals.db = client.db("BIMM");

@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
-const dotenv = require('dotenv')
+const dotenv = require('dotenv');
 const { MONGO_URI } = process.env;
 const options = { useNewUrlParser: true, useUnifiedTopology: true }
 

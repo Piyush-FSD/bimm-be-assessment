@@ -1,4 +1,4 @@
-FROM node:16
+FROM node:latest
 
 WORKDIR /usr/src/app
 
@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 4000
 
-CMD [ "nodemon", "index.js" ]
+CMD [ "node", "index.js" ]

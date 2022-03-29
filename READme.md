@@ -1,15 +1,15 @@
 BIMM Backend Assessment
 
-DIRECTORY
+DIRECTORY -
 Please go into the "server" folder
 
-DEPENDENCIES
+DEPENDENCIES -
 Run "npm install" to install dependencies
 
-START
+START -
 To start project, run "npm start"
 
-NOTE
+NOTE -
 From the 10,000+ results, I displayed the first 10 makes so we can see the results faster.
 
 RUN DOCKER
